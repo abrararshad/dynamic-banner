@@ -332,7 +332,7 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
         $ids = \Drupal::entityQuery('dynamic_banner')
             ->condition('type', $types, 'IN', $language)
             ->condition('status', 1)
-            ->execute()
+            ->execute();
         return DynamicBanner::loadMultiple($ids);
     }
 
