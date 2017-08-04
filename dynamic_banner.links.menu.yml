@@ -1,0 +1,18 @@
+
+# Dynamic banner menu items definition
+entity.dynamic_banner.collection:
+  title: 'Dynamic Banner'
+  route_name: entity.dynamic_banner.collection
+  description: 'Create dynamic banners'
+  parent: system.admin_structure
+  weight: -100
+
+
+# Dynamic banner type menu items definition
+entity.dynamic_banner_type.collection:
+  title: 'Dynamic Banner Types'
+  route_name: entity.dynamic_banner_type.collection
+  description: 'List of types (bundles)'
+  parent: system.admin_structure
+  weight: -99
+

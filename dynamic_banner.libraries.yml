@@ -1,0 +1,10 @@
+dynamic_banner.bxslider:
+  version: VERSION
+  js:
+    vendor/bxslider/jquery.bxslider.min.js: {}
+    vendor/bxslider/script.js: {}
+  css:
+    component:
+      vendor/bxslider/jquery.bxslider.min.css: {}
+  dependencies:
+    - core/jquery

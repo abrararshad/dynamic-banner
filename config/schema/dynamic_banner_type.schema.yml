@@ -1,0 +1,15 @@
+dynamic_banner.dynamic_banner_type.*:
+  type: config_entity
+  label: 'Dynamic banner type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    description:
+      type: text
+      label: 'Description'
+    uuid:
+      type: string

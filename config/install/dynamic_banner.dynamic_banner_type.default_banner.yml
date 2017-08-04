@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sW8ECwJYxvtuqG7DdjUxhiVf5JqB64HGf1Fxcam56O8
+id: default_banner
+label: 'Default Banner'
+description: 'Default banner type'

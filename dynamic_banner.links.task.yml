@@ -1,0 +1,23 @@
+# Dynamic banner routing definition
+
+entity.dynamic_banner.canonical:
+  route_name: entity.dynamic_banner.canonical
+  base_route: entity.dynamic_banner.canonical
+  title: 'View'
+
+entity.dynamic_banner.edit_form:
+  route_name: entity.dynamic_banner.edit_form
+  base_route: entity.dynamic_banner.canonical
+  title: 'Edit'
+
+entity.dynamic_banner.version_history:
+  route_name: entity.dynamic_banner.version_history
+  base_route: entity.dynamic_banner.canonical
+  title: 'Revisions'
+
+entity.dynamic_banner.delete_form:
+  route_name:  entity.dynamic_banner.delete_form
+  base_route:  entity.dynamic_banner.canonical
+  title: Delete
+  weight: 10
+

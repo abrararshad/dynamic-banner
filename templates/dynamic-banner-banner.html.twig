@@ -1,0 +1,23 @@
+{#
+/**
+ * @file dynamic_banner.html.twig
+ * Default theme implementation to present Dynamic banner data.
+ *
+ * This template is used when viewing Dynamic banner pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_dynamic_banner()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<li{{ attributes.addClass('dynamic_banner') }}>
+    {% if content.image %}
+        {{- content.image|without('label') -}}
+    {% endif %}
+</li>

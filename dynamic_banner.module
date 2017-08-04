@@ -1,0 +1,122 @@
+<?php
+
+/**
+ * @file
+ * Contains dynamic_banner.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function dynamic_banner_help($route_name, RouteMatchInterface $route_match) {
+    switch ($route_name) {
+        // Main module help for the dynamic_banner module.
+        case 'help.page.dynamic_banner':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Generates blocks to place banners on specific paths') . '</p>';
+            return $output;
+
+        default:
+    }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dynamic_banner_theme() {
+    $theme = [];
+
+    $theme['dynamic_banner_banner'] = [
+        'render element' => 'elements',
+        'file' => 'dynamic_banner.page.inc',
+        'template' => 'dynamic-banner-banner',
+    ];
+    $theme['dynamic_banner_slideshow'] = [
+        'render element' => 'elements',
+        'file' => 'dynamic_banner.page.inc',
+        'template' => 'dynamic-banner-slideshow',
+    ];
+
+    return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_dynamic_banner_slideshow().
+ */
+function dynamic_banner_theme_suggestions_dynamic_banner_slideshow(array $variables) {
+    $suggestions = [];
+
+    $elements = $variables['elements'];
+    $config = $elements['#configuration'];
+    $name = 'dynamic_banner_slideshow__';
+
+    $instance_suggestion = $name . (isset($config['instance_id'])?
+        $config['instance_id'] : 'dynamicbanner');
+
+    $suggestions[] = $instance_suggestion;
+
+    if(isset($config['override'])) {
+        $suggestions[] = $instance_suggestion . '_' . ($config['override'] == TRUE ? 'overridden' : 'default');
+    }
+
+    if(isset($elements['#library_name'])) {
+        $suggestions[] = $library_suggestion = $name .$elements['#library_name'];
+        if(isset($config['override'])) {
+            $suggestions[] = $library_suggestion . '_' . ($config['override'] == TRUE ? 'overridden' : 'default');
+        }
+
+        $suggestions[] = $lib_instance = $instance_suggestion .'_'. $elements['#library_name'];
+
+        if(isset($config['override'])) {
+            $suggestions[] = $lib_instance . '_' . ($config['override'] == TRUE ? 'overridden' : 'default');
+        }
+    }
+
+    return $suggestions;
+}
+
+/**
+ * Implements hook_theme_suggestions_dynamic_banner_banner().
+ */
+function dynamic_banner_theme_suggestions_dynamic_banner_banner(array $variables) {
+    $suggestions = [];
+    $entity = $variables['elements']['#dynamic_banner'];
+    $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+    $suggestions[] = 'dynamic_banner_banner__' . $sanitized_view_mode;
+    $suggestions[] = 'dynamic_banner_banner__' . $entity->bundle();
+    $suggestions[] = 'dynamic_banner_banner__' . $entity->bundle() . '__' . $sanitized_view_mode;
+    $suggestions[] = 'dynamic_banner_banner__' . $entity->id();
+    $suggestions[] = 'dynamic_banner_banner__' . $entity->id() . '__' . $sanitized_view_mode;
+
+    return $suggestions;
+}
+
+/**
+ * Implements hook_preprocess_entity_add_list().
+ */
+function dynamic_banner_preprocess_entity_add_list(array &$variables) {
+    $entityManager = \Drupal::service('entity_type.manager');
+
+    foreach ($entityManager->getStorage('dynamic_banner_type')->loadMultiple() as $entity) {
+        $variables['bundles'][$entity->id()]['description'] = [
+            '#markup' => $entity->getDescription()
+        ];
+    }
+}
+
+/**
+ * Implements hook_dynamic_banner_add_libraries().
+ */
+function dynamic_banner_dynamic_banner_add_libraries() {
+    return [
+        'bxslider' => [
+            'name' => 'bxslider (Default)',
+            'library' => 'dynamic_banner/dynamic_banner.bxslider',
+            'classes' => ['bxslider']
+        ]
+    ];
+}

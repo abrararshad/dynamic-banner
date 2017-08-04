@@ -1,0 +1,33 @@
+add dynamic banner entities:
+  title: 'Create new Dynamic banner entities'
+
+administer dynamic banner entities:
+  title: 'Administer Dynamic banner entities'
+  description: 'Allow to access the administration form to configure Dynamic banner entities.'
+  restrict access: true
+
+delete dynamic banner entities:
+  title: 'Delete Dynamic banner entities'
+
+edit dynamic banner entities:
+  title: 'Edit Dynamic banner entities'
+
+access dynamic banner overview:
+  title: 'Access the Dynamic banner overview page'
+
+view published dynamic banner entities:
+  title: 'View published Dynamic banner entities'
+
+view unpublished dynamic banner entities:
+  title: 'View unpublished Dynamic banner entities'
+
+view all dynamic banner revisions:
+  title: 'View all Dynamic banner revisions'
+
+revert all dynamic banner revisions:
+  title: 'Revert all Dynamic banner revisions'
+  description: 'Role requires permission <em>view Dynamic banner revisions</em> and <em>edit rights</em> for dynamic banner entities in question or <em>administer dynamic banner entities</em>.'
+
+delete all dynamic banner revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Dynamic banner revisions</em> and <em>delete rights</em> for dynamic banner entities in question or <em>administer dynamic banner entities</em>.'

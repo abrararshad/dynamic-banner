@@ -1,0 +1,11 @@
+entity.dynamic_banner.add_form:
+  route_name: entity.dynamic_banner.add_page
+  title: 'Add Banner'
+  appears_on:
+    - entity.dynamic_banner.collection
+entity.dynamic_banner_type.add_form:
+  route_name: entity.dynamic_banner_type.add_form
+  title: 'Add Banner Type'
+  appears_on:
+    - entity.dynamic_banner_type.collection
+

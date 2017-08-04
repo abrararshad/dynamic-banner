@@ -1,0 +1,5 @@
+name: Dynamic Banner
+type: module
+description: Generates a block to place banners on specific paths
+core: 8.x
+package: Content
