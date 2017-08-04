@@ -216,6 +216,7 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
             ->setLabel(t('Name'))
             ->setDescription(t('The name of the Dynamic banner entity.'))
             ->setRevisionable(TRUE)
+            ->setTranslatable(TRUE)
             ->setSettings([
                 'max_length' => 50,
                 'text_processing' => 0,
@@ -237,6 +238,7 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
             ->setLabel(t('Image'))
             ->setDescription(t('Image to be displayed'))
             ->setRevisionable(TRUE)
+            ->setTranslatable(TRUE)
             ->setDefaultValue('')
             ->setSettings([
                 'text_processing' => 0
