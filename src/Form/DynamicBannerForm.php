@@ -72,7 +72,7 @@ class DynamicBannerForm extends ContentEntityForm {
                     '%label' => $entity->label(),
                 ]));
         }
-        $form_state->setRedirect('entity.dynamic_banner.canonical', ['dynamic_banner' => $entity->id()]);
+        $form_state->setRedirect('view.dynamic_banner.page_1', ['dynamic_banner' => $entity->id()]);
     }
 
 }

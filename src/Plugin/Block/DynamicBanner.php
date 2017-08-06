@@ -12,8 +12,8 @@ use Drupal\dynamic_banner\Entity\DynamicBanner as BannerEntity;
 
 
 /**
- * Class HelloBlock
- * @package Drupal\custom_test\Plugin\Block
+ * Class DynamicBanner
+ * @package Drupal\dynmaic_banner\Plugin\Block
  *
  * @Block(
  *     id = "dynamic_banner_block",
@@ -23,16 +23,50 @@ use Drupal\dynamic_banner\Entity\DynamicBanner as BannerEntity;
  */
 class DynamicBanner extends BlockBase implements BlockPluginInterface {
 
+    /**
+     * Holds libraries gathered from other modules/themes
+     *
+     * @var array
+     */
     private $libraries;
 
+    /**
+     * Holds the key to store banners configuration such as weight. In case of overridden
+     * the key gets appended with the URL of the page while the original value and
+     * key persists in configuration.
+     *
+     * @var string
+     */
     private $bannersConfigKey;
 
+    /**
+     * Holds the key to store banner types. In case of overridden the key gets appended
+     * with the URL of the page while the original value and key persists in configuration.
+     *
+     * @var string
+     */
     private $bannerTypesConfigKey;
 
+    /**
+     * Holds the key to store selected library. In case of overridden the key gets appended
+     * with the URL of the page while the original value and key persists in configuration.
+     *
+     * @var string
+     */
     private $libraryConfigKey;
 
+    /**
+     * The path is the destination in the URL. Allows the block to be overridden if needed
+     *
+     * @var null|string
+     */
     private $overridePath;
 
+    /**
+     * Decides whether the block is being overridden or not
+     *
+     * @var bool
+     */
     private $override;
 
     public function __construct(array $configuration, $plugin_id, $plugin_definition) {
@@ -279,6 +313,7 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
         $sorted_banners = BannerEntity::setBannerWeight($banners, $this->getConfigBanners());
 
         foreach ($sorted_banners as $key => $banner) {
+            $banner = \Drupal::entityManager()->getTranslationFromContext($banner);
             $key = $banner->id();
 
             $form['banners'][$key]['#attributes']['class'][] = 'draggable';
@@ -287,7 +322,7 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
                 '#tree' => FALSE,
                 'data' => [
                     'label' => [
-                        '#plain_text' => $banner->label()
+                        '#plain_text' => $banner->getName()
                     ],
                 ],
             ];

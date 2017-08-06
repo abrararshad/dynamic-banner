@@ -303,14 +303,19 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
             ->setLabel(t('Publishing status'))
             ->setDescription(t('A boolean indicating whether the Dynamic banner is published.'))
             ->setRevisionable(TRUE)
+            ->setTranslatable(TRUE)
             ->setDefaultValue(TRUE);
 
         $fields['created'] = BaseFieldDefinition::create('created')
             ->setLabel(t('Created'))
+            ->setRevisionable(TRUE)
+            ->setTranslatable(TRUE)
             ->setDescription(t('The time that the entity was created.'));
 
         $fields['changed'] = BaseFieldDefinition::create('changed')
             ->setLabel(t('Changed'))
+            ->setRevisionable(TRUE)
+            ->setTranslatable(TRUE)
             ->setDescription(t('The time that the entity was last edited.'));
 
         $fields['revision_translation_affected'] = BaseFieldDefinition::create('boolean')
