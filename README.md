@@ -3,7 +3,7 @@ Drupal 8 dynamic banner module
 
 # Installation
 -   Install the module like any other Drupal Module
--   Go to `/admin/structure/dynamic_banner_type` to add the banner or edit the default one
+-   Go to `/admin/structure/dynamic_banner_type` to add the banner type or edit the default one
 -   Go to `/admin/content/dynamic_banner` to add the banners (if page does not appear, clear the cache once)
 -   Go to blocks page `/admin/structure/block` and add the block `Dynamic Banner`
 -   Configure the block by selecting banner types etc...
