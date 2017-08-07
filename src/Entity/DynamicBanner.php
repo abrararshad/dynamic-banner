@@ -249,7 +249,7 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
                 'weight' => -9
             ])
             ->setDisplayOptions('form', [
-                'type' => 'image',
+                'type' => 'image_image',
                 'weight' => -9
             ])
             ->setDisplayConfigurable('form', TRUE)
