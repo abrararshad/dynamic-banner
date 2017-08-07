@@ -33,7 +33,7 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
     /**
      * Holds the key to store banners configuration such as weight. In case of overridden
      * the key gets appended with the URL of the page while the original value and
-     * key persists in configuration.
+     * key persist in configuration.
      *
      * @var string
      */
@@ -41,7 +41,7 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
 
     /**
      * Holds the key to store banner types. In case of overridden the key gets appended
-     * with the URL of the page while the original value and key persists in configuration.
+     * with the URL of the page while the original value and key persist in configuration.
      *
      * @var string
      */
@@ -49,7 +49,7 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
 
     /**
      * Holds the key to store selected library. In case of overridden the key gets appended
-     * with the URL of the page while the original value and key persists in configuration.
+     * with the URL of the page while the original value and key persist in configuration.
      *
      * @var string
      */
@@ -291,7 +291,8 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
         $form['banners'] = [
             '#type' => 'table',
             '#header' => [
-                $this->t('Banners'),
+                $this->t('Image'),
+                $this->t('Name'),
                 $this->t('Weight'),
                 $this->t('Operations')
             ],
@@ -316,8 +317,15 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
             $banner = \Drupal::entityManager()->getTranslationFromContext($banner);
             $key = $banner->id();
 
+            $image_array = $banner->image->get(0)->view();
+            $image_array['#image_style'] = 'dynamic_banner_thumbnail';
+
             $form['banners'][$key]['#attributes']['class'][] = 'draggable';
             $form['banners'][$key]['#weight'] = $banner->weight;
+            $form['banners'][$key]['image'] = [
+                '#tree' => FALSE,
+                'data' => $image_array,
+            ];
             $form['banners'][$key]['banner'] = [
                 '#tree' => FALSE,
                 'data' => [

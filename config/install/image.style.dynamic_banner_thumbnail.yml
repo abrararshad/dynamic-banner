@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+name: dynamic_banner_thumbnail
+label: 'Dynamic Banner Thumbnail'
+effects:
+  98dda003-0f1f-4e1a-a5e7-4be4efed3f6f:
+    uuid: 98dda003-0f1f-4e1a-a5e7-4be4efed3f6f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 120
+      height: 80
