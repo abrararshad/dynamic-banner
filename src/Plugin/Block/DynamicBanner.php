@@ -9,6 +9,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\dynamic_banner\Entity\DynamicBanner as BannerEntity;
+use Drupal\Component\Utility\NestedArray;
 
 
 /**
@@ -94,11 +95,6 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
         if (sizeof($banners) > 0) {
             $render_array = entity_view_multiple($banners, 'full');
 
-            foreach ($render_array as $key => $array) {
-                if (is_numeric($key))
-                    $render_array[$key]['#theme'] = 'dynamic_banner_banner';
-            }
-
             // Default library
             $render_array['#attached']['library'] = ['dynamic_banner/dynamic_banner.bxslider'];
 
@@ -110,11 +106,23 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
             }
 
             $render_array['#theme'] = 'dynamic_banner_slideshow';
-            $render_array['#configuration'] = $this->configuration;
-            $render_array['#library_name'] = $library;
-            $render_array['#plugin_id'] = $this->pluginId;
-            $render_array['#id'] = $this->configuration['instance_id'];
             $render_array['#classes'] = $library_classes;
+
+            $extra = [
+                '#configuration' => $this->configuration,
+                '#library_name' => $library,
+                '#plugin_id' => $this->pluginId,
+                '#id' => $this->configuration['instance_id'],
+            ];
+
+            $render_array += $extra;
+
+            foreach ($render_array as $key => $array) {
+                if (is_numeric($key)) {
+                    $render_array[$key]['#theme'] = 'dynamic_banner_banner';
+                    $render_array[$key] += $extra;
+                }
+            }
 
             return $render_array;
         }

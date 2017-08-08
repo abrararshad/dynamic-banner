@@ -16,7 +16,11 @@ function dynamic_banner_help($route_name, RouteMatchInterface $route_match) {
         case 'help.page.dynamic_banner':
             $output = '';
             $output .= '<h3>' . t('About') . '</h3>';
-            $output .= '<p>' . t('Generates blocks to place banners on specific paths') . '</p>';
+            $output .= '<p>' . t('Generates a block to place banners on specific paths. 
+                    It also introduces new Entity Type Dynamic Banner which can be used to 
+                     define multiple type of banners and configure them in block\'s configuration 
+                     independently of the other blocks\' instances in the same region or different.') . '</p>';
+
             return $output;
 
         default:
@@ -47,14 +51,37 @@ function dynamic_banner_theme() {
  * Implements hook_theme_suggestions_dynamic_banner_slideshow().
  */
 function dynamic_banner_theme_suggestions_dynamic_banner_slideshow(array $variables) {
+    $name = 'dynamic_banner_slideshow__';
+
+    return generate_dynamic_banner_suggestions($name, $variables);
+}
+
+/**
+ * Implements hook_theme_suggestions_dynamic_banner_banner().
+ */
+function dynamic_banner_theme_suggestions_dynamic_banner_banner(array $variables) {
+    $name = 'dynamic_banner_banner__';
+
+    return generate_dynamic_banner_suggestions($name, $variables);
+}
+
+/**
+ * Generates suggestions based on the dynamic banner's block configuration and other keys
+ * set in the block's build function.
+ *
+ * @param $name string to prefix with every suggestion
+ * @param $variables theme variables
+ *
+ * @return array suggestions
+ */
+function generate_dynamic_banner_suggestions($name, $variables){
     $suggestions = [];
 
     $elements = $variables['elements'];
     $config = $elements['#configuration'];
-    $name = 'dynamic_banner_slideshow__';
 
     $instance_suggestion = $name . (isset($config['instance_id'])?
-        $config['instance_id'] : 'dynamicbanner');
+            $config['instance_id'] : 'dynamicbanner');
 
     $suggestions[] = $instance_suggestion;
 
@@ -74,23 +101,6 @@ function dynamic_banner_theme_suggestions_dynamic_banner_slideshow(array $variab
             $suggestions[] = $lib_instance . '_' . ($config['override'] == TRUE ? 'overridden' : 'default');
         }
     }
-
-    return $suggestions;
-}
-
-/**
- * Implements hook_theme_suggestions_dynamic_banner_banner().
- */
-function dynamic_banner_theme_suggestions_dynamic_banner_banner(array $variables) {
-    $suggestions = [];
-    $entity = $variables['elements']['#dynamic_banner'];
-    $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
-
-    $suggestions[] = 'dynamic_banner_banner__' . $sanitized_view_mode;
-    $suggestions[] = 'dynamic_banner_banner__' . $entity->bundle();
-    $suggestions[] = 'dynamic_banner_banner__' . $entity->bundle() . '__' . $sanitized_view_mode;
-    $suggestions[] = 'dynamic_banner_banner__' . $entity->id();
-    $suggestions[] = 'dynamic_banner_banner__' . $entity->id() . '__' . $sanitized_view_mode;
 
     return $suggestions;
 }
