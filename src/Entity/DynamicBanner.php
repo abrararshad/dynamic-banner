@@ -353,6 +353,15 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
         foreach ($banners as $key => $banner) {
             $include_paths = explode(PHP_EOL, $banner->get('path_include')->value);
             $exclude_paths = explode(PHP_EOL, $banner->get('path_exclude')->value);
+
+            if(!is_array($include_paths)){
+                $include_paths = [];
+            }
+
+            if(!is_array($exclude_paths)){
+                $exclude_paths = [];
+            }
+
             if (static::isBannerValidForPath($path_alias, $include_paths)
                 && static::isBannerValidForPath($path_alias, $exclude_paths, 'exclude')
             ) {
@@ -373,7 +382,7 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
         return isset($param['destination']) ? '/' . $param['destination'] : Null;
     }
 
-    public static function isBannerValidForPath(string $path, array $paths, $mode = 'include') {
+    public static function isBannerValidForPath($path, array $paths, $mode = 'include') {
         $path = ltrim(rtrim(strtolower($path), '/\\'), '/\\');
         $isValid = FALSE;
 
