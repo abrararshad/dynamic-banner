@@ -393,6 +393,12 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
             if (!$isValid && $isFront && $search_path === '<front>')
                 $isValid = TRUE;
 
+            // While overriding the block from the front-page the path could be node
+            if(!$isValid && $path === 'node'
+                && ($search_path === 'node' || $search_path === '<front>')){
+                $isValid = TRUE;
+            }
+
             if (!$isValid) {
                 // Check for '/*' and go one level up in the actual path
                 if (($pos = strpos($search_path, '/*')) !== FALSE) {

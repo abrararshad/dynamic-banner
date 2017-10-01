@@ -415,7 +415,7 @@ class DynamicBanner extends BlockBase implements BlockPluginInterface {
                 $config[$this->bannersConfigKey] : [];
         }
 
-        return $bannerConfig;
+        return is_array($bannerConfig) ? $bannerConfig : [];
     }
 
     public function setConfigBanners($config) {

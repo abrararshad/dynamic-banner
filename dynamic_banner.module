@@ -35,13 +35,11 @@ function dynamic_banner_theme() {
 
     $theme['dynamic_banner_banner'] = [
         'render element' => 'elements',
-        'file' => 'dynamic_banner.page.inc',
-        'template' => 'dynamic-banner-banner',
+        'file' => 'dynamic_banner.page.inc'
     ];
     $theme['dynamic_banner_slideshow'] = [
         'render element' => 'elements',
-        'file' => 'dynamic_banner.page.inc',
-        'template' => 'dynamic-banner-slideshow',
+        'file' => 'dynamic_banner.page.inc'
     ];
 
     return $theme;
