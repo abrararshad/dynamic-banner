@@ -388,7 +388,8 @@ class DynamicBanner extends RevisionableContentEntityBase implements DynamicBann
 
         foreach ($paths as $search_path) {
             $search_path = ltrim(rtrim(strtolower($search_path), '/\\'), '/\\');
-
+            $search_path = str_replace("\r", '', $search_path);
+            
             // Exact match
             if ($path === $search_path)
                 $isValid = TRUE;
